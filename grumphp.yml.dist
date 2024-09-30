@@ -1,23 +1,49 @@
+parameters:
+  git_dir: .
+  bin_dir: vendor/bin
 grumphp:
   ascii:
-    failed: vendor/vijaycs85/drupal-quality-checker/resources/ascii/grumpy.txt
-    succeeded: vendor/vijaycs85/drupal-quality-checker/resources/ascii/happy.txt
+    failed: vendor/axelerant/drupal-quality-checker/resources/grumpy.txt
+    succeeded: vendor/axelerant/drupal-quality-checker/resources/happy.txt
   tasks:
-    phplint: ~
+    phplint:
+      exclude:
+        - web/core
+        - web/modules/contrib
+        - web/themes/contrib
+        - web/profiles/contrib
+        - web/sites/default
+        - vendor
+      triggered_by:
+        - php
+        - module
+        - theme
+        - inc
     yamllint: ~
     composer: ~
-    composer_normalize: ~
     jsonlint: ~
-    phpcpd:
-      directory: ['./src']
+    twigcs:
+      path: 'web'
+      ruleset: 'FriendsOfTwig\Twigcs\Ruleset\Official'
+      exclude:
+        - core
+        - modules/contrib
+        - themes/contrib
+        - profiles/contrib
     phpcs:
-      standard: Drupal
+      standard:
+        - phpcs.xml.dist
       ignore_patterns:
         - .github
         - .gitlab
+        - .ddev
+        - /config
+        - /drush
+        - /web/robots.txt
+        - /web/sites/default
         - bower_components
         - node_modules
-        - vendor
+        - /vendor
       triggered_by:
         - php
         - module
@@ -29,4 +55,33 @@ grumphp:
         - css
         - info
         - txt
-        - md
+    phpmd:
+      whitelist_patterns:
+        - /^web\/modules\/custom\/(.*)/
+        - /^web\/themes\/custom\/(.*)/
+      ruleset:
+        - phpmd.xml.dist
+      triggered_by:
+        - php
+        - module
+        - theme
+    phpstan:
+      configuration: phpstan.neon.dist
+      ignore_patterns:
+        - .github
+        - .gitlab
+        - .ddev
+        - /config
+        - /drush
+        - /web/robots.txt
+        - /web/sites/default
+        - bower_components
+        - node_modules
+        - /vendor
+      triggered_by:
+        - php
+        - module
+        - theme
+        - inc
+      memory_limit: "-1"
+      use_grumphp_paths: true
