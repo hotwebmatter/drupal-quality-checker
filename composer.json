@@ -1,12 +1,12 @@
 {
-    "name": "axelerant/drupal-quality-checker",
+    "name": "hotwebmatter/drupal-quality-checker",
     "type": "composer-plugin",
     "description": "Code quality checking tools for Drupal project.",
-    "homepage": "https://github.com/axelerant/drupal-quality-checker",
+    "homepage": "https://github.com/hotwebmatter/drupal-quality-checker",
     "license": "proprietary",
     "authors": [
         {
-            "name": "Hussain Abbas",
+            "name": "Matthew Obert",
             "role": "Maintainer"
         }
     ],
@@ -22,8 +22,8 @@
         "phpro/grumphp-shim": "^2.0"
     },
     "support": {
-        "issues": "https://github.com/axelerant/drupal-quality-checker/issues",
-        "source": "https://github.com/axelerant/drupal-quality-checker"
+        "issues": "https://github.com/hotwebmatter/drupal-quality-checker/issues",
+        "source": "https://github.com/hotwebmatter/drupal-quality-checker"
     },
     "config": {
         "sort-packages": true,
