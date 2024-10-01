@@ -1,21 +1,21 @@
 # Package for Drupal Code Quality presets
 
-This has been customised from [vijaycs85/drupal-quality-checker](https://packagist.org/packages/vijaycs85/drupal-quality-checker) for Axelerant needs. Apart from a different template file, it uses the Axelerant logo.
+This has been customised from [vijaycs85/drupal-quality-checker](https://packagist.org/packages/vijaycs85/drupal-quality-checker) based on the Axelerant fork [axelerant/drupal-quality-checker](https://packagist.org/packages/axelerant/drupal-quality-checker). Apart from a different template file, it uses the `AxelerantDQCPlugin` to copy default configuration files as described below.
 
 ## Installation
 
 _Upgrading from Beta 8?_ Read [the instructions for changes](#upgrading-from-beta-8) you need to make to grumphp.yml.dist.
 
 ```bash
-composer require --dev axelerant/drupal-quality-checker
+composer require --dev hotwebmatter/drupal-quality-checker
 ```
 
 This will add the plugin to your project and copy the default configuration files. These files are:
 
-* grumphp.yml.dist
-* phpcs.xml.dist
-* phpmd.xml.dist
-* phpstan.neon.dist
+* `grumphp.yml.dist`
+* `phpcs.xml.dist`
+* `phpmd.xml.dist`
+* `phpstan.neon.dist`
 
 Since these are `.dist` files, the plugin will overwrite them on every `composer install`. If you mean to customize the default settings, then we recommend that you rename them to remove the `.dist` suffix. As such, it is a good idea to add these `.dist` files to your `.gitignore` file.
 
@@ -68,7 +68,7 @@ grumphp:
 Copy the ruleset to the project root first
 
 ```bash
-cp vendor/axelerant/drupal-quality-checker/phpmd.xml.dist phpmd.xml
+cp vendor/hotwebmatter/drupal-quality-checker/phpmd.xml.dist phpmd.xml
 ```
 
 Edit it as per your needs and commit. Remember to modify the grumphp.yml file with the new path.
@@ -86,7 +86,7 @@ grumphp:
 Copy the ruleset to the project root first
 
 ```bash
-cp vendor/axelerant/drupal-quality-checker/phpcs.xml.dist phpcs.xml
+cp vendor/hotwebmatter/drupal-quality-checker/phpcs.xml.dist phpcs.xml
 ```
 
 Edit it as per your needs and commit. Remember to modify the grumphp.yml file with the new path.
@@ -104,7 +104,7 @@ grumphp:
 Copy the ruleset to the project root first
 
 ```bash
-cp vendor/axelerant/drupal-quality-checker/phpstan.neon.dist phpstan.neon
+cp vendor/hotwebmatter/drupal-quality-checker/phpstan.neon.dist phpstan.neon
 ```
 
 Edit it as per your needs and commit. Remember to modify the grumphp.yml file with the new path.
@@ -136,11 +136,3 @@ The scaffolding operation runs with every composer operation and overwrites file
 ```
 
 For more details, read the ["Excluding Scaffold files"](https://github.com/drupal/core-composer-scaffold#excluding-scaffold-files) section of the [documentation](https://github.com/drupal/core-composer-scaffold/blob/8.8.x/README.md) for the core-composer-scaffold plugin.
-
-## Upgrading from Beta 8
-
-GrumPHP 0.19 introduced [a breaking change](https://github.com/phpro/grumphp/releases/tag/v0.19.0) to the structure of the YAML file. The template in this repository is updated as per the new structure. However, you would need to change the YML files on your projects before you update to Beta 9 or later.
-
-Fortunately, the change is simple and in many cases would only require a one line change. Rename the `parameters` section to `grumphp`. Our default template contains two parameters which still need to remain under `parameters`. They are `git_dir` and `bin_dir`. Look at [the diff of the change](https://github.com/axelerant/drupal-quality-checker/commit/e8d9414ce6ea046b0386115764db68e5251d8a58#diff-94c8df1b4af91d80f7417cad14bbe0e5) to understand what needs to be changed in your grumphp.yml file. Also, read more at the [release page for GrumPHP 0.19](https://github.com/phpro/grumphp/releases/tag/v0.19.0).
-
-Lastly, you can [watch this video](https://youtu.be/XoFJfBcZF58) where I upgrade this on a project. Link: https://youtu.be/XoFJfBcZF58
